@@ -37,6 +37,7 @@ public class GameDirector : MonoBehaviour
             this.GameReferee.GetComponent<GameReferee>().playertrun = false;
         }
         Debug.Log("start");
+        Debug.Log("test01");
     }
 
     // Update is called once per frame
