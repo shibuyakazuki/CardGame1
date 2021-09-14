@@ -38,6 +38,8 @@ public class GameDirector : MonoBehaviour
         }
         Debug.Log("start");
         Debug.Log("test02");
+        Debug.Log("test01");
+
     }
 
     // Update is called once per frame
