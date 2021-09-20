@@ -26,6 +26,8 @@ public class FieldController : MonoBehaviour,IDropHandler
                     IsCard[i].transform.position = new Vector3(px + (i * 40), transform.position.y, 0);
                 }
                 GameDirector.GetComponent<GameDirector>().DecreaseCard(eventData.pointerDrag.GetComponent<CardController>());
+                Debug.Log("Decrease");
+                this.GameDirector.GetComponent<GameDirector>().TrunEnd();
             }
         }
             /*if (eventData.pointerDrag != null)

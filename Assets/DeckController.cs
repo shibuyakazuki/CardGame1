@@ -33,7 +33,6 @@ public class DeckController : MonoBehaviour
    public int DrawCard() //引いたカードを表すメゾット
     {
         int ret = 0;
-        GameDirector.GetComponent<GameDirector>().OnCardFlag = false;
         if(count < 18)
         {
             var rand = new System.Random();

@@ -22,24 +22,9 @@ public class GameDirector : MonoBehaviour
         this.CardGenerator = GameObject.Find("CardGenerator");
         this.GameReferee = GameObject.Find("GameReferee");
         this.EnemyController = GameObject.Find("EnemyController");
-       /* Cardfill();
-        this.GameReferee.GetComponent<GameReferee>().playertrun = false;
-        Enemytrun();
-        int x;
-        var rand = new System.Random();
-        x = rand.Next(0, 2);
-        if (x == 0)
-        {
-            this.GameReferee.GetComponent<GameReferee>().playertrun = true;
-        }
-        else
-        {
-            this.GameReferee.GetComponent<GameReferee>().playertrun = false;
-        }
-        Debug.Log("start");
-        Debug.Log("test02");
-        Debug.Log("test01");
-       */
+       Cardfill();
+        this.GameReferee.GetComponent<GameReferee>().playertrun = true;
+        Cardfill();
     }
 
     // Update is called once per frame
@@ -66,15 +51,21 @@ public class GameDirector : MonoBehaviour
 
         return i;
     }
+    public void RefreshOnCardFlag()
+    {
+        OnCardFlag = false;
+    }
     public void DecreaseCard(CardController card)
     {
         Debug.Log("Generator");
         eiterhand.RemoveCard(card);
-        this.GameReferee.GetComponent<GameReferee>().TrunChange();
-        //Enemytrun();
     }
     public void Cardfill()
     {
+        if (this.GameReferee.GetComponent<GameReferee>().playertrun)
+        {
+            OnCardFlag = false;
+        }
         int hands = 0;
         if (this.GameReferee.GetComponent<GameReferee>().playertrun)
         {
@@ -98,6 +89,21 @@ public class GameDirector : MonoBehaviour
             }
         }
     }
+
+    public void TrunStart() //ターン開始時の確認メゾット
+    {
+        //OnCardFlag = false; ここでfalseにすると変な動きをする
+        if (GameReferee.GetComponent<GameReferee>().playertrun == false)
+        {
+            this.EnemyController.GetComponent<EnemyController>().EnemyMove();
+        }
+    }
+    public void TrunEnd() //ターンの終わりを確認する
+    {
+        this.GameReferee.GetComponent<GameReferee>().TrunChange();
+        TrunStart();
+    }
+
     public void Enemytrun()
     {
         if (this.GameReferee.GetComponent<GameReferee>().playertrun == false)

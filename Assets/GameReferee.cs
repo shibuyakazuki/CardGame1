@@ -6,13 +6,13 @@ public class GameReferee : MonoBehaviour
 {
     GameObject GameDirector;
     GameObject DeckController;
-    public bool playertrun;
+    public bool playertrun = true;
     
 
     // Start is called before the first frame update
     void Start()
     {
-        playertrun = true;
+        
     }
 
     // Update is called once per frame

@@ -8,8 +8,7 @@ public class EnemyController : MonoBehaviour
     GameObject DeckController;
     GameObject FieldController;
     GameObject CardGenerator;
-    int min = 0;
-    int card;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -27,14 +26,6 @@ public class EnemyController : MonoBehaviour
 
     public void EnemyMove()
     {
-        card = this.DeckController.GetComponent<DeckController>().DrawCard();
-
-        if (min > card)
-        {
-            min = card;
-        }
-        CardController Card = this.CardGenerator.GetComponent<CardGenerator>().Generator(0);
-        this.GameDirector.GetComponent<GameDirector>().Enemyhandfill(Card);
         this.GameDirector.GetComponent<GameDirector>().Cardfill();
 
     }
