@@ -30,7 +30,7 @@ public class GameDirector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        
     }
 
     public int ArrayIndex(int number)
@@ -82,6 +82,10 @@ public class GameDirector : MonoBehaviour
             Debug.Log(DeckController);
             Debug.Log(DeckController.GetComponent<DeckController>());
             int Cardnumber = DeckController.GetComponent<DeckController>().DrawCard();
+            if (eiterhand == enemyhand)
+            {
+                this.EnemyController.GetComponent<EnemyController>().ListUp(Cardnumber);
+            }
             if (Cardnumber >= 0)
             {
                 CardController Card = CardGenerator.GetComponent<CardGenerator>().Generator(Cardnumber);
@@ -95,6 +99,7 @@ public class GameDirector : MonoBehaviour
         //OnCardFlag = false; ここでfalseにすると変な動きをする
         if (GameReferee.GetComponent<GameReferee>().playertrun == false)
         {
+            Debug.Log("a");
             this.EnemyController.GetComponent<EnemyController>().EnemyMove();
         }
     }
@@ -104,7 +109,7 @@ public class GameDirector : MonoBehaviour
         TrunStart();
     }
 
-    public void Enemytrun()
+    /*public void Enemytrun()
     {
         if (this.GameReferee.GetComponent<GameReferee>().playertrun == false)
         {
@@ -114,6 +119,6 @@ public class GameDirector : MonoBehaviour
     public void Enemyhandfill(CardController card)
     {
         enemyhand.AddCard(card);
-    }
+    }*/
 
 }

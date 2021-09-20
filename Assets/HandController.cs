@@ -48,4 +48,8 @@ public class HandController : MonoBehaviour
         int cards = CardList.Count;
         return cards;
     }
+    public CardController MoveCard(int index)
+    {
+        return CardList[index];
+    }
 }

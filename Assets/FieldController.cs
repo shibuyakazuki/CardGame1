@@ -45,8 +45,22 @@ public class FieldController : MonoBehaviour,IDropHandler
             }*/
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void OnDropCard(CardController Card)
+    {
+        IsCard.Add(Card.gameObject);
+        Card.gameObject.transform.SetParent(transform);
+        count = IsCard.Count;
+        float px = LeftBox.transform.position.x;
+        for (var i = 0; i < count; i++)
+        {
+            IsCard[i].transform.position = new Vector3(px + (i * 40), transform.position.y, 0);
+        }
+        GameDirector.GetComponent<GameDirector>().DecreaseCard(Card.gameObject.GetComponent<CardController>());
+        this.GameDirector.GetComponent<GameDirector>().TrunEnd();
+    }
+
+        // Start is called before the first frame update
+        void Start()
     {
         this.GameDirector = GameObject.Find("GameDirector");
         this.LeftBox = GameObject.Find("LeftBox");
