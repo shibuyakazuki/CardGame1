@@ -22,7 +22,7 @@ public class GameDirector : MonoBehaviour
         this.CardGenerator = GameObject.Find("CardGenerator");
         this.GameReferee = GameObject.Find("GameReferee");
         this.EnemyController = GameObject.Find("EnemyController");
-        Cardfill();
+       /* Cardfill();
         this.GameReferee.GetComponent<GameReferee>().playertrun = false;
         Enemytrun();
         int x;
@@ -39,7 +39,7 @@ public class GameDirector : MonoBehaviour
         Debug.Log("start");
         Debug.Log("test02");
         Debug.Log("test01");
-
+       */
     }
 
     // Update is called once per frame

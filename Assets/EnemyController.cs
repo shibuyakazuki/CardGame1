@@ -27,7 +27,7 @@ public class EnemyController : MonoBehaviour
 
     public void EnemyMove()
     {
-        card = DeckController.GetComponent<DeckController>().DrawCard();
+        card = this.DeckController.GetComponent<DeckController>().DrawCard();
 
         if (min > card)
         {
@@ -35,7 +35,7 @@ public class EnemyController : MonoBehaviour
         }
         CardController Card = this.CardGenerator.GetComponent<CardGenerator>().Generator(0);
         this.GameDirector.GetComponent<GameDirector>().Enemyhandfill(Card);
-        //this.GameDirector.GetComponent<GameDirector>().Cardfill();
+        this.GameDirector.GetComponent<GameDirector>().Cardfill();
 
     }
 }
