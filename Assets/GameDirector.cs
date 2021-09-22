@@ -12,8 +12,8 @@ public class GameDirector : MonoBehaviour
     public HandController playerhand;
     public HandController enemyhand;
     public bool OnCardFlag = false;
+    public bool playertrun = true;
     int[] index_Array = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-    private HandController eiterhand;
 
     // Start is called before the first frame update
     void Start()
@@ -22,8 +22,8 @@ public class GameDirector : MonoBehaviour
         this.CardGenerator = GameObject.Find("CardGenerator");
         this.GameReferee = GameObject.Find("GameReferee");
         this.EnemyController = GameObject.Find("EnemyController");
-       Cardfill();
-        this.GameReferee.GetComponent<GameReferee>().playertrun = true;
+        Cardfill();
+        playertrun = !playertrun;
         Cardfill();
     }
 
@@ -57,39 +57,52 @@ public class GameDirector : MonoBehaviour
     }
     public void DecreaseCard(CardController card)
     {
-        Debug.Log("Generator");
-        eiterhand.RemoveCard(card);
+        if (playertrun)
+        {
+            playerhand.RemoveCard(card);
+        }
+        else
+        {
+            enemyhand.RemoveCard(card);
+        }
     }
     public void Cardfill()
     {
-        if (this.GameReferee.GetComponent<GameReferee>().playertrun)
+   
+        if (playertrun)
         {
             OnCardFlag = false;
         }
         int hands = 0;
-        if (this.GameReferee.GetComponent<GameReferee>().playertrun)
+        if (playertrun)
         {
-            eiterhand = playerhand;
+            hands = playerhand.GetComponent<HandController>().CheckHandCard();
         }
         else
         {
-            eiterhand = enemyhand;
+            hands = enemyhand.GetComponent<HandController>().CheckHandCard();
         }
-
-        hands = eiterhand.GetComponent<HandController>().CheckHandCard();
+        
         if(hands < 2)
         {
             Debug.Log(DeckController);
             Debug.Log(DeckController.GetComponent<DeckController>());
             int Cardnumber = DeckController.GetComponent<DeckController>().DrawCard();
-            if (eiterhand == enemyhand)
+            if (!playertrun)
             {
                 this.EnemyController.GetComponent<EnemyController>().ListUp(Cardnumber);
             }
             if (Cardnumber >= 0)
             {
-                CardController Card = CardGenerator.GetComponent<CardGenerator>().Generator(Cardnumber);
-                eiterhand.AddCard(Card);
+                CardController Card = CardGenerator.GetComponent<CardGenerator>().Generator(Cardnumber,!playertrun);
+                if (playertrun)
+                {
+                    playerhand.AddCard(Card,Cardnumber);
+                }
+                else
+                {
+                    enemyhand.AddCard(Card,Cardnumber);
+                }
             }
         }
     }
@@ -97,28 +110,14 @@ public class GameDirector : MonoBehaviour
     public void TrunStart() //ターン開始時の確認メゾット
     {
         //OnCardFlag = false; ここでfalseにすると変な動きをする
-        if (GameReferee.GetComponent<GameReferee>().playertrun == false)
+        if (!playertrun)
         {
-            Debug.Log("a");
             this.EnemyController.GetComponent<EnemyController>().EnemyMove();
         }
     }
     public void TrunEnd() //ターンの終わりを確認する
     {
-        this.GameReferee.GetComponent<GameReferee>().TrunChange();
+        playertrun = !playertrun;
         TrunStart();
     }
-
-    /*public void Enemytrun()
-    {
-        if (this.GameReferee.GetComponent<GameReferee>().playertrun == false)
-        {
-            this.EnemyController.GetComponent<EnemyController>().EnemyMove();
-        }
-    }
-    public void Enemyhandfill(CardController card)
-    {
-        enemyhand.AddCard(card);
-    }*/
-
 }

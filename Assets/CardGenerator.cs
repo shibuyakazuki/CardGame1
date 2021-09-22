@@ -23,11 +23,13 @@ public class CardGenerator : MonoBehaviour
         
     }
 
-    public CardController Generator(int index)
+    public CardController Generator(int index,bool Isbrind)
     {
-        GameObject Card = Instantiate(CardPrefab[index]) as GameObject;
-        Card.transform.SetParent(parentTrain,false);
-        return Card.GetComponent<CardController>();
+        GameObject objCard = Instantiate(CardPrefab[index]) as GameObject;
+        objCard.transform.SetParent(parentTrain,false);
+        CardController Card = objCard.GetComponent<CardController>();
+        Card.init(Isbrind);
+        return Card;
 
     }
 }

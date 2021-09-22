@@ -20,9 +20,4 @@ public class GameReferee : MonoBehaviour
     {
         
     }
-
-    public void TrunChange()
-    {
-        playertrun = !playertrun;
-    }
 }

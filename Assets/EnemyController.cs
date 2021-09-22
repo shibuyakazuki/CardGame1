@@ -10,6 +10,7 @@ public class EnemyController : MonoBehaviour
     GameObject FieldController;
     GameObject CardGenerator;
     GameObject Ereaenemyside;
+    GameObject CardController;
     List<int> handnumbers = new List<int>();
     private int Cardnumber = 0;
     private CardController Card;
@@ -25,6 +26,8 @@ public class EnemyController : MonoBehaviour
         this.FieldController = GameObject.Find("Playarea");
         this.CardGenerator = GameObject.Find("CardGenerator");
         this.Ereaenemyside  = GameObject.Find("areaenemyside");
+        this.CardController = GameObject.Find("Card");
+
     }
 
     // Update is called once per frame
@@ -74,6 +77,7 @@ public class EnemyController : MonoBehaviour
         OnCardTimerStart = false;
         OnCardTimer = 0;
         OnDropTimeStart = true;
+        
     }
     public void OnCard(CardController Card)
     {

@@ -7,6 +7,7 @@ using DG.Tweening;
 public class HandController : MonoBehaviour
 {
     private List<CardController> CardList = new List<CardController>();
+    public List<int> NumberList = new List<int>();
     public GameObject LeftSide;
     public GameObject RightSide;
 
@@ -21,9 +22,10 @@ public class HandController : MonoBehaviour
     {
         
     }
-    public void AddCard(CardController card)
+    public void AddCard(CardController card, int number)
     {
         CardList.Add(card);
+        NumberList.Add(number);
         LineUp();
     }
     public void RemoveCard(CardController card)
@@ -42,6 +44,17 @@ public class HandController : MonoBehaviour
             CardList[i].GetComponent<RectTransform>().DOMove(PosTarget, 0.25f);
         }
     }
+
+    //ここからやる（タグで種類の判別を行う）
+    /*public int ConvertListnumbers(CardController card)
+    {
+        int number;
+        if ()
+        {
+
+        }
+        return number;
+    }*/
 
     public int CheckHandCard()
     {

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using DG.Tweening;
+using System;
 
 public class CardController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,IDragHandler,IPointerClickHandler
 {
@@ -11,6 +12,8 @@ public class CardController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,ID
     private GameObject GameDirector;
     private GameObject GameReferee;
     private GameObject Playarea;
+    private GameObject objUra;
+    private bool Isbrind;
 
     public void OnDrag(PointerEventData eventData)
     {
@@ -31,6 +34,11 @@ public class CardController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,ID
         }
     }
 
+    public void init(bool _isbrind)
+    {
+        Isbrind = _isbrind;
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log("OnPointerClick");
@@ -44,12 +52,22 @@ public class CardController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,ID
         start_pos = transform.position;
     }
 
+    public void Open()
+    {
+        objUra.SetActive(false);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         this.GameDirector = GameObject.Find("GameDirector");
         this.GameReferee = GameObject.Find("GameReferee");
         this.Playarea = GameObject.Find("Playarea");
+        objUra = transform.Find("imgUra").gameObject;
+        if (objUra != null)
+        {
+            objUra.SetActive(Isbrind);
+        }
     }
 
     // Update is called once per frame
