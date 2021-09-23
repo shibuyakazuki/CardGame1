@@ -74,6 +74,10 @@ public class EnemyController : MonoBehaviour
         int Cardnumbers_index = ChooseCard();
         Card = this.Ereaenemyside.GetComponent<HandController>().MoveCard(Cardnumbers_index);
         Card.transform.DOMove(new Vector3(360f, 200f, 0f), 2f);
+        //Card.transform.DOComplete();
+        Card.transform.DORotate(new Vector3(0, 180f,0), 0.05f).SetLoops(2,LoopType.Yoyo);
+        GameObject Ura = Card.transform.Find("imgUra").gameObject;
+        Ura.SetActive(false);
         OnCardTimerStart = false;
         OnCardTimer = 0;
         OnDropTimeStart = true;

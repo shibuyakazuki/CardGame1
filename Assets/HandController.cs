@@ -47,7 +47,6 @@ public class HandController : MonoBehaviour
         }
     }
 
-    //ここからやる（タグで種類の判別を行う）
     public int ConvertListnumbers(CardController card)
     {
         int number;
