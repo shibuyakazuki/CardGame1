@@ -5,6 +5,17 @@ TagManager:
   serializedVersion: 2
   tags:
   - PlayArea
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - New tag
+  - 7
+  - 8
+  - 9
+  - 10
+  - 6
   layers:
   - Default
   - TransparentFX

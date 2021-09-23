@@ -31,6 +31,8 @@ public class HandController : MonoBehaviour
     public void RemoveCard(CardController card)
     {
         CardList.Remove(card);
+        int number = ConvertListnumbers(card);
+        NumberList.Remove(number);
     }
     public void LineUp()
     {
@@ -46,15 +48,51 @@ public class HandController : MonoBehaviour
     }
 
     //ここからやる（タグで種類の判別を行う）
-    /*public int ConvertListnumbers(CardController card)
+    public int ConvertListnumbers(CardController card)
     {
         int number;
-        if ()
+        if (card.gameObject.tag == "1")
         {
-
+            number = 1;
         }
-        return number;
-    }*/
+        else if (card.gameObject.tag == "2" )
+        {
+            number = 2;
+        }
+        else if (card.gameObject.tag == "3")
+        {
+            number = 3;
+        }
+        else if (card.gameObject.tag == "4")
+        {
+            number = 4;
+        }
+        else if (card.gameObject.tag == "5")
+        {
+            number = 5;
+        }
+        else if (card.gameObject.tag == "6")
+        {
+            number = 6;
+        }
+        else if (card.gameObject.tag == "7")
+        {
+            number = 7;
+        }
+        else if (card.gameObject.tag == "8")
+        {
+            number = 8;
+        }
+        else if (card.gameObject.tag == "9")
+        {
+            number = 9;
+        }
+        else
+        {
+            number = 10;
+        }
+            return number;
+    }
 
     public int CheckHandCard()
     {

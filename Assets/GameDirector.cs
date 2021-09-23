@@ -12,7 +12,7 @@ public class GameDirector : MonoBehaviour
     public HandController playerhand;
     public HandController enemyhand;
     public bool OnCardFlag = false;
-    public bool playertrun = true;
+    public bool playertrun = false;
     int[] index_Array = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
     // Start is called before the first frame update

@@ -1359,6 +1359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab14ff16fc26463e97d7a84fa43641f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NumberList: 
   LeftSide: {fileID: 1289023605}
   RightSide: {fileID: 1544513286}
 --- !u!1 &1527153398
@@ -1739,6 +1740,7 @@ MonoBehaviour:
   playerhand: {fileID: 1352639619}
   enemyhand: {fileID: 2080421517}
   OnCardFlag: 0
+  playertrun: 0
 --- !u!4 &1917796191
 Transform:
   m_ObjectHideFlags: 0
@@ -1891,5 +1893,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab14ff16fc26463e97d7a84fa43641f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NumberList: 
   LeftSide: {fileID: 1527153398}
   RightSide: {fileID: 571213797}
