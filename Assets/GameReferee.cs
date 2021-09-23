@@ -20,4 +20,19 @@ public class GameReferee : MonoBehaviour
     {
         
     }
+    public void judg(List<int> playerhand, List<int> enemyhand)
+    {
+        if (playerhand[0] == enemyhand[0])
+        {
+            Debug.Log("Draw");
+        }
+        else if (playerhand[0] > enemyhand[0])
+        {
+            Debug.Log("Player Win");
+        }
+        else
+        {
+            Debug.Log("Enemy Win");
+        }
+    }
 }

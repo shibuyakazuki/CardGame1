@@ -95,12 +95,12 @@ public class EnemyController : MonoBehaviour
         Cardnumber = 0;
         if (handnumbers[0] > handnumbers[1])
         {
-            Debug.Log("index1");
+            //Debug.Log("index1");
             Cardnumber = 1;
         }
         else
         {
-            Debug.Log("index0");
+            //Debug.Log("index0");
             Cardnumber = 0;
         }
         return Cardnumber;

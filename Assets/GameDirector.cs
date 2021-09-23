@@ -13,6 +13,7 @@ public class GameDirector : MonoBehaviour
     public HandController enemyhand;
     public bool OnCardFlag = false;
     public bool playertrun = false;
+    //public bool enablefill = true;
     int[] index_Array = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
     // Start is called before the first frame update
@@ -25,6 +26,7 @@ public class GameDirector : MonoBehaviour
         Cardfill();
         playertrun = !playertrun;
         Cardfill();
+        TrunStart();
     }
 
     // Update is called once per frame
@@ -68,7 +70,6 @@ public class GameDirector : MonoBehaviour
     }
     public void Cardfill()
     {
-   
         if (playertrun)
         {
             OnCardFlag = false;
@@ -92,27 +93,34 @@ public class GameDirector : MonoBehaviour
             {
                 this.EnemyController.GetComponent<EnemyController>().ListUp(Cardnumber);
             }
-            if (Cardnumber >= 0)
+            CardController Card = CardGenerator.GetComponent<CardGenerator>().Generator(Cardnumber,!playertrun);
+            if (playertrun)
             {
-                CardController Card = CardGenerator.GetComponent<CardGenerator>().Generator(Cardnumber,!playertrun);
-                if (playertrun)
-                {
-                    playerhand.AddCard(Card,Cardnumber);
-                }
-                else
-                {
-                    enemyhand.AddCard(Card,Cardnumber);
-                }
+                playerhand.AddCard(Card,Cardnumber);
+            }
+            else
+            {
+                enemyhand.AddCard(Card,Cardnumber);
             }
         }
     }
 
     public void TrunStart() //ターン開始時の確認メゾット
     {
-        //OnCardFlag = false; ここでfalseにすると変な動きをする
-        if (!playertrun)
+        if (this.DeckController.GetComponent<DeckController>().RemainingDeck() == 0)
         {
-            this.EnemyController.GetComponent<EnemyController>().EnemyMove();
+            this.GameReferee.GetComponent<GameReferee>().judg(playerhand.NumberList, enemyhand.NumberList);
+        }
+        else
+        {
+            if (!playertrun)
+            {
+                this.EnemyController.GetComponent<EnemyController>().EnemyMove();
+            }
+            else
+            {
+                Cardfill();
+            }
         }
     }
     public void TrunEnd() //ターンの終わりを確認する

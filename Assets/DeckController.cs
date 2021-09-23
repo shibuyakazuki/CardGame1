@@ -7,7 +7,7 @@ public class DeckController : MonoBehaviour
     private int[] deck
         = { 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 10 }; //山札の配列
 
-    public int count = 0;
+    private int count = 0;
     GameObject GameDirector;
     GameObject GameReferee;
 
@@ -33,22 +33,18 @@ public class DeckController : MonoBehaviour
    public int DrawCard() //引いたカードを表すメゾット
     {
         int ret = 0;
-        if(count < 18)
-        {
-            var rand = new System.Random();
-            int ListIndex = rand.Next(0, 18 - count);
-            int ArrayIndex = CallNumber[ListIndex];
-            CallNumber.RemoveAt(ListIndex);
-            Debug.Log(deck[ArrayIndex]);
-            ret = deck[ArrayIndex];
-            count += 1;
-            return ret;
-        }
-        else
-        {
-            Debug.Log("result");
-            ret = -1;
-            return ret;
-        }
+        var rand = new System.Random();
+        int ListIndex = rand.Next(0, 18 - count);
+        int ArrayIndex = CallNumber[ListIndex];
+        CallNumber.RemoveAt(ListIndex);
+        //Debug.Log(deck[ArrayIndex]);
+        ret = deck[ArrayIndex];
+        count += 1;
+        return ret;
+    }
+    public int RemainingDeck()
+    {
+        int remainingnumber = CallNumber.Count;
+        return remainingnumber;
     }
 }
