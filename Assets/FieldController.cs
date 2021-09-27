@@ -26,36 +26,22 @@ public class FieldController : MonoBehaviour,IDropHandler
                     IsCard[i].transform.position = new Vector3(px + (i * 40), transform.position.y, 0);
                 }
                 GameDirector.GetComponent<GameDirector>().DecreaseCard(eventData.pointerDrag.GetComponent<CardController>());
-                //Debug.Log("Decrease");
                 this.GameDirector.GetComponent<GameDirector>().TrunEnd();
             }
         }
-            /*if (eventData.pointerDrag != null)
-            {
-                GameDirector.GetComponent<GameDirector>().OnCardFlag = true;
-                IsCard.Add(eventData.pointerDrag);
-                eventData.pointerDrag.gameObject.transform.SetParent(transform);
-                count = IsCard.Count;
-                float px = LeftBox.transform.position.x;
-                for (var i = 0; i < count; i++)
-                {
-                    IsCard[i].transform.position = new Vector3(px + (i * 40), transform.position.y, 0);
-                }
-                GameDirector.GetComponent<GameDirector>().DecreaseCard(eventData.pointerDrag.GetComponent<CardController>());
-            }*/
     }
 
-    public void OnDropCard(CardController Card)
+    public void OnDropCard(CardController onDoropCard) //Enemy用
     {
-        IsCard.Add(Card.gameObject);
-        Card.gameObject.transform.SetParent(transform);
+        IsCard.Add(onDoropCard.gameObject);
+        onDoropCard.gameObject.transform.SetParent(transform);
         count = IsCard.Count;
         float px = LeftBox.transform.position.x;
         for (var i = 0; i < count; i++)
         {
             IsCard[i].transform.position = new Vector3(px + (i * 40), transform.position.y, 0);
         }
-        GameDirector.GetComponent<GameDirector>().DecreaseCard(Card.gameObject.GetComponent<CardController>());
+        GameDirector.GetComponent<GameDirector>().DecreaseCard(onDoropCard.gameObject.GetComponent<CardController>());
         this.GameDirector.GetComponent<GameDirector>().TrunEnd();
     }
 

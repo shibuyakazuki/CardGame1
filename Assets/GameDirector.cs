@@ -26,13 +26,32 @@ public class GameDirector : MonoBehaviour
         Cardfill();
         playertrun = !playertrun;
         Cardfill();
-        TrunStart();
+        StartCoroutine(DicideTrun());
+        //TrunStart();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    private IEnumerator DicideTrun()
+    {
+        var rand = new System.Random();
+        int number = rand.Next(0,2);
+        Debug.Log("number" + number);
+        if (number == 0)
+        {
+            playertrun = true;
+        }
+        else
+        {
+            playertrun = false;
+        }
+
+        yield return new WaitForSeconds(1f);
+        TrunStart();
     }
 
     public int ArrayIndex(int number)
@@ -89,10 +108,6 @@ public class GameDirector : MonoBehaviour
             Debug.Log(DeckController);
             Debug.Log(DeckController.GetComponent<DeckController>());
             int Cardnumber = DeckController.GetComponent<DeckController>().DrawCard();
-            if (!playertrun)
-            {
-                this.EnemyController.GetComponent<EnemyController>().ListUp(Cardnumber);
-            }
             CardController Card = CardGenerator.GetComponent<CardGenerator>().Generator(Cardnumber,!playertrun);
             if (playertrun)
             {

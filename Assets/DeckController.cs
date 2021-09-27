@@ -1,16 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DeckController : MonoBehaviour
 {
     private int[] deck
         = { 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 10 }; //山札の配列
 
-    private int count = 0;
-    GameObject GameDirector;
-    GameObject GameReferee;
-
+     private int count = 0;
      private List<int> CallNumber = new List<int>(); //0~17までのdeckのインデックス番号を表したリスト
 
     // Start is called before the first frame update
@@ -20,8 +18,6 @@ public class DeckController : MonoBehaviour
         {
             CallNumber.Add(i);
         }
-        this.GameDirector = GameObject.Find("GameDirector");
-        this.GameReferee = GameObject.Find("GameReferee");
     }
 
     // Update is called once per frame
@@ -37,14 +33,23 @@ public class DeckController : MonoBehaviour
         int ListIndex = rand.Next(0, 18 - count);
         int ArrayIndex = CallNumber[ListIndex];
         CallNumber.RemoveAt(ListIndex);
-        //Debug.Log(deck[ArrayIndex]);
         ret = deck[ArrayIndex];
         count += 1;
+        DestroyObj();
         return ret;
     }
     public int RemainingDeck()
     {
         int remainingnumber = CallNumber.Count;
         return remainingnumber;
+    }
+    private void DestroyObj()
+    {
+        int remainingnumber = 0;
+        remainingnumber = RemainingDeck();
+        if (remainingnumber == 0)
+        {
+            gameObject.GetComponent<Image>().enabled = false;
+        }
     }
 }
