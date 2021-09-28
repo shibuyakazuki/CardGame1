@@ -7,7 +7,8 @@ public class GameDirector : MonoBehaviour
 {
     GameObject DeckController;
     GameObject CardGenerator;
-    GameObject GameReferee;
+    //GameObject GameReferee;
+    GameReferee gameReferee;
     GameObject EnemyController;
     public HandController playerhand;
     public HandController enemyhand;
@@ -21,7 +22,7 @@ public class GameDirector : MonoBehaviour
     {
         this.DeckController = GameObject.Find("Deck");
         this.CardGenerator = GameObject.Find("CardGenerator");
-        this.GameReferee = GameObject.Find("GameReferee");
+        gameReferee = GameObject.Find("GameReferee").GetComponent<GameReferee>();
         this.EnemyController = GameObject.Find("EnemyController");
         Cardfill();
         playertrun = !playertrun;
@@ -107,15 +108,15 @@ public class GameDirector : MonoBehaviour
         {
             Debug.Log(DeckController);
             Debug.Log(DeckController.GetComponent<DeckController>());
-            int Cardnumber = DeckController.GetComponent<DeckController>().DrawCard();
-            CardController Card = CardGenerator.GetComponent<CardGenerator>().Generator(Cardnumber,!playertrun);
+            int handnumber = DeckController.GetComponent<DeckController>().DrawCard();
+            CardController Card = CardGenerator.GetComponent<CardGenerator>().Generator(handnumber,!playertrun);
             if (playertrun)
             {
-                playerhand.AddCard(Card,Cardnumber);
+                playerhand.AddCard(Card);
             }
             else
             {
-                enemyhand.AddCard(Card,Cardnumber);
+                enemyhand.AddCard(Card);
             }
         }
     }
@@ -124,7 +125,21 @@ public class GameDirector : MonoBehaviour
     {
         if (this.DeckController.GetComponent<DeckController>().RemainingDeck() == 0)
         {
-            this.GameReferee.GetComponent<GameReferee>().judg(playerhand.NumberList, enemyhand.NumberList);
+            int player_handnumber = playerhand.GethighestHandNumber();
+            int enemy_handnumber = enemyhand.GethighestHandNumber();
+            GAMERESULT result = gameReferee.judg(player_handnumber, enemy_handnumber);
+            if (result == GAMERESULT.WIN)
+            {
+
+            }
+            else if (result == GAMERESULT.LOSE)
+            {
+
+            }
+            else
+            {
+
+            }
         }
         else
         {

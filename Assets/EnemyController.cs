@@ -7,18 +7,20 @@ public class EnemyController : MonoBehaviour
 {
     GameObject GameDirector;
     GameObject FieldController;
-    GameObject Ereaenemyside;
-    GameObject AreaEnemySide;
+    //GameObject Ereaenemyside;
+    //GameObject AreaEnemySide;
+    private HandController handController;
 
-    private int Cardnumber = 0;
+    //private int Cardnumber = 0;
     private CardController Card;
     // Start is called before the first frame update
     void Start()
     {
         this.GameDirector = GameObject.Find("GameDirector");
         this.FieldController = GameObject.Find("Playarea");
-        this.Ereaenemyside  = GameObject.Find("areaenemyside");
-        this.AreaEnemySide = GameObject.Find("areaenemyside");
+        //this.Ereaenemyside  = GameObject.Find("areaenemyside");
+        //this.AreaEnemySide = GameObject.Find("areaenemyside");
+        handController = GameObject.Find("areaenemyside").GetComponent<HandController>();
     }
 
     // Update is called once per frame
@@ -34,7 +36,7 @@ public class EnemyController : MonoBehaviour
     public void PlayCard()
     {
         int Cardnumbers_index = ChooseCard();
-        Card = this.Ereaenemyside.GetComponent<HandController>().MoveCard(Cardnumbers_index);
+        Card = handController.MoveCard(Cardnumbers_index);
         Card.transform.DOMove(new Vector3(360f, 200f, 0f), 1f);
         Card.transform.DORotate(new Vector3(0, 180f,0), 0.05f).SetLoops(2,LoopType.Yoyo);
         GameObject Ura = Card.transform.Find("imgUra").gameObject;
@@ -48,7 +50,8 @@ public class EnemyController : MonoBehaviour
    
     public int ChooseCard()
     {
-        Cardnumber = 0;
+        return handController.GetlowestCardNumber();
+        /*int Cardnumber = 0;
         Debug.Log("choose0");
         int handnumber0 = AreaEnemySide.GetComponent<HandController>().NumberList[0];
         int handnumber1 = AreaEnemySide.GetComponent<HandController>().NumberList[1];
@@ -61,7 +64,7 @@ public class EnemyController : MonoBehaviour
         {
             Cardnumber = 0;
         }
-        return Cardnumber;
+        return Cardnumber;*/
     }
     private IEnumerator EnemyMoveCoroutine()
     {

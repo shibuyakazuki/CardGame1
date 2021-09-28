@@ -3,8 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameReferee : MonoBehaviour
+public enum GAMERESULT
 {
+    DRAW,
+    WIN,
+    LOSE,
+};
+public class GameReferee : MonoBehaviour
+{ 
     GameObject ResultText;
     public bool playertrun = true;
     
@@ -20,21 +26,24 @@ public class GameReferee : MonoBehaviour
     {
         
     }
-    public void judg(List<int> playerhand, List<int> enemyhand)
+    public GAMERESULT judg(int playerhand, int enemyhand)
     {
-        if (playerhand[0] == enemyhand[0])
+        if (playerhand == enemyhand)
         {
             Debug.Log("Draw");
+            return GAMERESULT.DRAW;
         }
-        else if (playerhand[0] > enemyhand[0])
+        else if (playerhand > enemyhand)
         {
             Debug.Log("Player Win");
             this.ResultText.GetComponent<Text>().text = "You Win !!";
+            return GAMERESULT.WIN;
         }
         else
         {
             Debug.Log("Enemy Win");
             this.ResultText.GetComponent<Text>().text = "You Lose";
+            return GAMERESULT.LOSE;
         }
     }
 }

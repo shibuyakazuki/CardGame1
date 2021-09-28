@@ -22,17 +22,17 @@ public class HandController : MonoBehaviour
     {
         
     }
-    public void AddCard(CardController card, int number)
+    public void AddCard(CardController card)
     {
         CardList.Add(card);
-        NumberList.Add(number);
+       // NumberList.Add(number);
         LineUp();
     }
     public void RemoveCard(CardController card)
     {
         CardList.Remove(card);
-        int number = ConvertListnumbers(card);
-        NumberList.Remove(number);
+        //int number = ConvertListnumbers(card);
+        //NumberList.Remove(number);
     }
     public void LineUp()
     {
@@ -45,6 +45,36 @@ public class HandController : MonoBehaviour
             Vector3 PosTarget = PosLeft + PosDelta * (i + 1);
             CardList[i].GetComponent<RectTransform>().DOMove(PosTarget, 0.25f);
         }
+    }
+
+    public int GetlowestCardNumber()
+    {
+        int ret = 0;
+        int min = 11;
+        for (var i = 0; i < CardList.Count; i++)
+        {
+            int x = CardList[i].handNumber;
+            if (min >= x)
+            {
+                min = x;
+                ret = i;
+            }
+        }
+        return ret;
+    }
+
+    public int GethighestHandNumber()
+    {
+        int max = 0;
+        for (var i = 0; i < CardList.Count; i++)
+        {
+            int x = CardList[i].handNumber;
+            if (max < x)
+            {
+                max = x;
+            }
+        }
+        return max;
     }
 
     public int ConvertListnumbers(CardController card)

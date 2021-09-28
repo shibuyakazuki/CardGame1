@@ -28,7 +28,7 @@ public class CardGenerator : MonoBehaviour
         GameObject objCard = Instantiate(CardPrefab[index]) as GameObject;
         objCard.transform.SetParent(parentTrain,false);
         CardController Card = objCard.GetComponent<CardController>();
-        Card.init(Isbrind);
+        Card.init(index, Isbrind);
         return Card;
 
     }

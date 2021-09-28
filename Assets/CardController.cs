@@ -14,6 +14,7 @@ public class CardController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,ID
     private GameObject Playarea;
     private GameObject objUra;
     private bool Isbrind;
+    public int handNumber;
 
     public void OnDrag(PointerEventData eventData)
     {
@@ -34,8 +35,9 @@ public class CardController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,ID
         }
     }
 
-    public void init(bool _isbrind)
+    public void init(int _handnumber, bool _isbrind)
     {
+        handNumber = _handnumber;
         Isbrind = _isbrind;
     }
 
