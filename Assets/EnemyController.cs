@@ -7,19 +7,14 @@ public class EnemyController : MonoBehaviour
 {
     GameObject GameDirector;
     GameObject FieldController;
-    //GameObject Ereaenemyside;
-    //GameObject AreaEnemySide;
     private HandController handController;
 
-    //private int Cardnumber = 0;
     private CardController Card;
     // Start is called before the first frame update
     void Start()
     {
         this.GameDirector = GameObject.Find("GameDirector");
         this.FieldController = GameObject.Find("Playarea");
-        //this.Ereaenemyside  = GameObject.Find("areaenemyside");
-        //this.AreaEnemySide = GameObject.Find("areaenemyside");
         handController = GameObject.Find("areaenemyside").GetComponent<HandController>();
     }
 
@@ -51,20 +46,6 @@ public class EnemyController : MonoBehaviour
     public int ChooseCard()
     {
         return handController.GetlowestCardNumber();
-        /*int Cardnumber = 0;
-        Debug.Log("choose0");
-        int handnumber0 = AreaEnemySide.GetComponent<HandController>().NumberList[0];
-        int handnumber1 = AreaEnemySide.GetComponent<HandController>().NumberList[1];
-        Debug.Log("choose1");
-        if (handnumber0 >= handnumber1)
-        {
-            Cardnumber = 1;
-        }
-        else
-        {
-            Cardnumber = 0;
-        }
-        return Cardnumber;*/
     }
     private IEnumerator EnemyMoveCoroutine()
     {
