@@ -11,14 +11,14 @@ public enum GAMERESULT
 };
 public class GameReferee : MonoBehaviour
 { 
-    GameObject ResultText;
+    //GameObject ResultText;
     public bool playertrun = true;
     
 
     // Start is called before the first frame update
     void Start()
     {
-        this.ResultText = GameObject.Find("ResultText");
+        //this.ResultText = GameObject.Find("ResultText");
     }
 
     // Update is called once per frame
@@ -30,19 +30,19 @@ public class GameReferee : MonoBehaviour
     {
         if (playerhand == enemyhand)
         {
-            Debug.Log("Draw");
+            //Debug.Log("Draw");
             return GAMERESULT.DRAW;
         }
         else if (playerhand > enemyhand)
         {
-            Debug.Log("Player Win");
-            this.ResultText.GetComponent<Text>().text = "You Win !!";
+            //Debug.Log("Player Win");
+            //this.ResultText.GetComponent<Text>().text = "You Win !!";
             return GAMERESULT.WIN;
         }
         else
         {
-            Debug.Log("Enemy Win");
-            this.ResultText.GetComponent<Text>().text = "You Lose";
+            //Debug.Log("Enemy Win");
+            //this.ResultText.GetComponent<Text>().text = "You Lose";
             return GAMERESULT.LOSE;
         }
     }

@@ -9,10 +9,13 @@ public class GameDirector : MonoBehaviour
     GameObject CardGenerator;
     GameReferee gameReferee;
     GameObject EnemyController;
+    GameObject ResultText;
+    FieldController fieldController;
     public HandController playerhand;
     public HandController enemyhand;
     public bool OnCardFlag = false;
     public bool playertrun = false;
+    //public bool secoundcard_6 = false;
     int[] index_Array = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
     // Start is called before the first frame update
@@ -22,10 +25,12 @@ public class GameDirector : MonoBehaviour
         this.CardGenerator = GameObject.Find("CardGenerator");
         gameReferee = GameObject.Find("GameReferee").GetComponent<GameReferee>();
         this.EnemyController = GameObject.Find("EnemyController");
+        this.ResultText = GameObject.Find("ResultText");
         Cardfill();
         playertrun = !playertrun;
         Cardfill();
         StartCoroutine(DicideTrun());
+        this.fieldController = GameObject.Find("Playarea").GetComponent<FieldController>();
         //TrunStart();
     }
 
@@ -121,22 +126,23 @@ public class GameDirector : MonoBehaviour
 
     public void TrunStart() //ターン開始時の確認メゾット
     {
-        if (this.DeckController.GetComponent<DeckController>().RemainingDeck() == 0)
+        if (this.DeckController.GetComponent<DeckController>().RemainingDeck() == 0 || fieldController.secondcard_6)
         {
             int player_handnumber = playerhand.GethighestHandNumber();
             int enemy_handnumber = enemyhand.GethighestHandNumber();
+            enemyhand.TrunCard();
             GAMERESULT result = gameReferee.judg(player_handnumber, enemy_handnumber);
             if (result == GAMERESULT.WIN)
             {
-
+                this.ResultText.GetComponent<Text>().text = "You Win !!";
             }
             else if (result == GAMERESULT.LOSE)
             {
-
+                this.ResultText.GetComponent<Text>().text = "You Lose";
             }
             else
             {
-
+                this.ResultText.GetComponent<Text>().text = "Draw";
             }
         }
         else

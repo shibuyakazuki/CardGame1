@@ -9,14 +9,19 @@ public class FieldController : MonoBehaviour,IDropHandler
     private GameObject LeftBox;
     public List<GameObject> IsCard = new List<GameObject>();
     public int count = 0;
+    public bool secondcard_6 = false;
     
-    public void OnDrop(PointerEventData eventData)
+    public void OnDrop(PointerEventData eventData)//カードが置かれた
     {
         if (GameDirector.GetComponent<GameDirector>().OnCardFlag == false)
         {
             if (eventData.pointerDrag != null)
             {
+                //効果を発動して
+                eventData.pointerDrag.GetComponent<CardController>().Effect(eventData.pointerDrag.GetComponent<CardController>().handNumber);
                 GameDirector.GetComponent<GameDirector>().OnCardFlag = true;
+                //3秒あける
+                //リストに移動して
                 IsCard.Add(eventData.pointerDrag);
                 eventData.pointerDrag.gameObject.transform.SetParent(transform);
                 count = IsCard.Count;
@@ -43,6 +48,20 @@ public class FieldController : MonoBehaviour,IDropHandler
         }
         GameDirector.GetComponent<GameDirector>().DecreaseCard(onDoropCard.gameObject.GetComponent<CardController>());
         this.GameDirector.GetComponent<GameDirector>().TrunEnd();
+    }
+
+    //IsCardリストのなかに指定した番号が何枚あるか返すメゾット
+    public int CountTheNumber(int targetnumber)
+    {
+        int countnumber = 0;
+        for (var i = 0; i < IsCard.Count; i++)
+        {
+            if (targetnumber == IsCard[i].gameObject.GetComponent<CardController>().handNumber)
+            {
+                countnumber += 1;
+            }
+        }
+        return countnumber;
     }
 
         // Start is called before the first frame update

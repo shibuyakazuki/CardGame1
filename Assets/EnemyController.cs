@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
     GameObject GameDirector;
     GameObject FieldController;
     private HandController handController;
+    public List<int> playershandNumber = new List<int>();
 
     private CardController Card;
     // Start is called before the first frame update
@@ -52,7 +53,11 @@ public class EnemyController : MonoBehaviour
         this.GameDirector.GetComponent<GameDirector>().Cardfill();
         yield return new WaitForSeconds(1f);
         PlayCard();
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
+        //ここのタイミングで効果を入れたい
+        Card.Effect(Card.handNumber);
+        //Debug.Log("効果発動");
+        yield return new WaitForSeconds(1f);
         OnCard(this.Card);
     }
 }

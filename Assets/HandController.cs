@@ -7,7 +7,7 @@ using DG.Tweening;
 public class HandController : MonoBehaviour
 {
     private List<CardController> CardList = new List<CardController>();
-    public List<int> NumberList = new List<int>();
+    //public List<int> NumberList = new List<int>();
     public GameObject LeftSide;
     public GameObject RightSide;
 
@@ -85,5 +85,22 @@ public class HandController : MonoBehaviour
     public CardController MoveCard(int index)
     {
         return CardList[index];
+    }
+
+    public void TrunCard()
+    {
+        for (var i = 0; i < CardList.Count; i++)
+        {
+            CardList[i].transform.DORotate(new Vector3(0, 180f, 0), 0.05f).SetLoops(2, LoopType.Yoyo);
+            CardList[i].transform.Find("imgUra").gameObject.SetActive(false);
+        }
+    }
+    public void OverCard()
+    {
+        for (var i = 0; i < CardList.Count; i++)
+        {
+            CardList[i].transform.DORotate(new Vector3(0, 180f, 0), 0.05f).SetLoops(2, LoopType.Yoyo);
+            CardList[i].transform.Find("imgUra").gameObject.SetActive(true);
+        }
     }
 }
