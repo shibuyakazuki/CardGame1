@@ -79,7 +79,11 @@ public class CardController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,ID
     {
         
     }
-    public void Effect(int handnumber)
+    public void TrunBack()
+    {
+        enemyhand.TrunBackCard();
+    }
+    public IEnumerator Effect(int handnumber, Action onfinished)
     {
         if (handnumber == 1)
         {
@@ -109,7 +113,7 @@ public class CardController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,ID
             {
                 Debug.Log("カードを見せ合う");
                 enemyhand.TrunCard();
-                Invoke("enemyhand.OverCard",3f);
+                Invoke(nameof(TrunBack),1f);
             }
             else
             {
@@ -133,5 +137,7 @@ public class CardController : MonoBehaviour,IBeginDragHandler,IEndDragHandler,ID
         {
             Debug.Log("Effect10");
         }
+        yield return new WaitForSeconds(2f);
+        onfinished.Invoke();
     }
 }

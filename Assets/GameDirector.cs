@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GameDirector : MonoBehaviour
 {
+    public float timer = 0;
     GameObject DeckController;
     GameObject CardGenerator;
     GameReferee gameReferee;
@@ -126,8 +127,9 @@ public class GameDirector : MonoBehaviour
 
     public void TrunStart() //ターン開始時の確認メゾット
     {
-        if (this.DeckController.GetComponent<DeckController>().RemainingDeck() == 0 || fieldController.secondcard_6)
+        if ( this.DeckController.GetComponent<DeckController>().RemainingDeck()== 0 || fieldController.secondcard_6)
         {
+            timer += Time.deltaTime;
             int player_handnumber = playerhand.GethighestHandNumber();
             int enemy_handnumber = enemyhand.GethighestHandNumber();
             enemyhand.TrunCard();

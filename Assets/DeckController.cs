@@ -30,14 +30,15 @@ public class DeckController : MonoBehaviour
     {
         int ret = 0;
         var rand = new System.Random();
-        int ListIndex = rand.Next(0, 18 - count);
-        int ArrayIndex = CallNumber[ListIndex];
-        CallNumber.RemoveAt(ListIndex);
-        ret = deck[ArrayIndex];
+        int callNumber_index = rand.Next(0, 18 - count);
+        int deck_index = CallNumber[callNumber_index];
+        CallNumber.RemoveAt(callNumber_index);
+        ret = deck[deck_index];
         count += 1;
         DestroyObj();
         return ret;
     }
+    //カードの残り枚数を教える
     public int RemainingDeck()
     {
         int remainingnumber = CallNumber.Count;
@@ -45,8 +46,7 @@ public class DeckController : MonoBehaviour
     }
     private void DestroyObj()
     {
-        int remainingnumber = 0;
-        remainingnumber = RemainingDeck();
+        int remainingnumber = CallNumber.Count;
         if (remainingnumber == 0)
         {
             gameObject.GetComponent<Image>().enabled = false;

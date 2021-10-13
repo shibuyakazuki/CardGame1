@@ -95,7 +95,7 @@ public class HandController : MonoBehaviour
             CardList[i].transform.Find("imgUra").gameObject.SetActive(false);
         }
     }
-    public void OverCard()
+    public void TrunBackCard()
     {
         for (var i = 0; i < CardList.Count; i++)
         {
